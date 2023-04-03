@@ -90,6 +90,16 @@ xcm = { package = "xcm", path = "../../xcm", default-features = false }
 xcm-executor = { package = "xcm-executor", path = "../../xcm/xcm-executor", default-features = false }
 xcm-builder = { package = "xcm-builder", path = "../../xcm/xcm-builder", default-features = false }
 
+# ibc
+pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40" }
+pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40"}
+ibc-support = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "polkadot-v0.9.40" }
+
+# for dev
+# pallet-ibc = { path = "../../../substrate-ibc/core",  default-features = false }
+# pallet-ics20-transfer = { path = "../../../substrate-ibc/app/ics20-transfer",  default-features = false }
+# ibc-support = { path = "../../../substrate-ibc/support",  default-features = false }
+
 [dev-dependencies]
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 keyring = { package = "sp-keyring", git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
@@ -178,6 +188,7 @@ std = [
 	"xcm/std",
 	"xcm-executor/std",
 	"xcm-builder/std",
+	"pallet-ibc/std",
 ]
 runtime-benchmarks = [
 	"runtime-common/runtime-benchmarks",

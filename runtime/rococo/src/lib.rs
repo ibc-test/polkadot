@@ -193,7 +193,7 @@ pub struct OriginPrivilegeCmp;
 impl PrivilegeCmp<OriginCaller> for OriginPrivilegeCmp {
 	fn cmp_privilege(left: &OriginCaller, right: &OriginCaller) -> Option<Ordering> {
 		if left == right {
-			return Some(Ordering::Equal)
+			return Some(Ordering::Equal);
 		}
 
 		match (left, right) {
@@ -941,32 +941,33 @@ impl InstanceFilter<RuntimeCall> for ProxyType {
 				RuntimeCall::Slots(..) |
 				RuntimeCall::Auctions(..) // Specifically omitting the entire XCM Pallet
 			),
-			ProxyType::Governance =>
-				matches!(
-					c,
-					RuntimeCall::Democracy(..) |
-						RuntimeCall::Council(..) | RuntimeCall::TechnicalCommittee(..) |
-						RuntimeCall::PhragmenElection(..) |
-						RuntimeCall::Treasury(..) |
-						RuntimeCall::Bounties(..) |
-						RuntimeCall::Tips(..) | RuntimeCall::Utility(..) |
-						RuntimeCall::ChildBounties(..)
-				),
+			ProxyType::Governance => matches!(
+				c,
+				RuntimeCall::Democracy(..)
+					| RuntimeCall::Council(..)
+					| RuntimeCall::TechnicalCommittee(..)
+					| RuntimeCall::PhragmenElection(..)
+					| RuntimeCall::Treasury(..)
+					| RuntimeCall::Bounties(..)
+					| RuntimeCall::Tips(..)
+					| RuntimeCall::Utility(..)
+					| RuntimeCall::ChildBounties(..)
+			),
 			ProxyType::IdentityJudgement => matches!(
 				c,
-				RuntimeCall::Identity(pallet_identity::Call::provide_judgement { .. }) |
-					RuntimeCall::Utility(..)
+				RuntimeCall::Identity(pallet_identity::Call::provide_judgement { .. })
+					| RuntimeCall::Utility(..)
 			),
 			ProxyType::CancelProxy => {
 				matches!(c, RuntimeCall::Proxy(pallet_proxy::Call::reject_announcement { .. }))
 			},
 			ProxyType::Auction => matches!(
 				c,
-				RuntimeCall::Auctions { .. } |
-					RuntimeCall::Crowdloan { .. } |
-					RuntimeCall::Registrar { .. } |
-					RuntimeCall::Multisig(..) |
-					RuntimeCall::Slots { .. }
+				RuntimeCall::Auctions { .. }
+					| RuntimeCall::Crowdloan { .. }
+					| RuntimeCall::Registrar { .. }
+					| RuntimeCall::Multisig(..)
+					| RuntimeCall::Slots { .. }
 			),
 			ProxyType::Society => matches!(c, RuntimeCall::Society(..)),
 		}
@@ -1315,6 +1316,14 @@ impl pallet_sudo::Config for Runtime {
 	type RuntimeCall = RuntimeCall;
 }
 
+impl pallet_ibc::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type TimeProvider = pallet_timestamp::Pallet<Runtime>;
+	type ExpectedBlockTime = ExpectedBlockTime;
+	const IBC_COMMITMENT_PREFIX: &'static [u8] = b"Ibc";
+	type WeightInfo = ();
+}
+
 construct_runtime! {
 	pub enum Runtime where
 		Block = Block,
@@ -1438,6 +1447,9 @@ construct_runtime! {
 
 		// Sudo.
 		Sudo: pallet_sudo::{Pallet, Call, Storage, Event<T>, Config<T>} = 255,
+
+		//ibc
+		Ibc: pallet_ibc = 253,
 	}
 }
 
@@ -2127,7 +2139,7 @@ mod remote_tests {
 	#[tokio::test]
 	async fn run_migrations() {
 		if var("RUN_MIGRATION_TESTS").is_err() {
-			return
+			return;
 		}
 
 		sp_tracing::try_init_simple();
