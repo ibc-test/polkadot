@@ -189,6 +189,8 @@ std = [
 	"xcm-executor/std",
 	"xcm-builder/std",
 	"pallet-ibc/std",
+	"pallet-ics20-transfer/std",
+	"ibc-support/std",
 ]
 runtime-benchmarks = [
 	"runtime-common/runtime-benchmarks",
