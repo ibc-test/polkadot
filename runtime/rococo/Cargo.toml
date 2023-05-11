@@ -92,9 +92,9 @@ xcm-builder = { package = "xcm-builder", path = "../../xcm/xcm-builder", default
 
 # ibc
 pallet-assets = { git = "https://github.com/octopus-network/substrate", default-features = false , branch = "polkadot-v0.9.40-rc" }
-pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40" }
-pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40"}
-ibc-support = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "polkadot-v0.9.40" }
+pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40-rc" }
+pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40-rc"}
+ibc-support = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "polkadot-v0.9.40-rc" }
 
 # for dev
 # pallet-ibc = { path = "../../../substrate-ibc/core",  default-features = false }
@@ -189,6 +189,7 @@ std = [
 	"xcm/std",
 	"xcm-executor/std",
 	"xcm-builder/std",
+	"pallet-assets/std",
 	"pallet-ibc/std",
 	"pallet-ics20-transfer/std",
 	"ibc-support/std",
