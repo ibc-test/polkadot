@@ -1076,6 +1076,8 @@ fn rococo_staging_testnet_config_genesis(wasm_binary: &[u8]) -> rococo_runtime::
 		},
 		xcm_pallet: Default::default(),
 		nis_counterpart_balances: Default::default(),
+		assets: Default::default(),
+		ics_20_transfer: Default::default(),
 	}
 }
 
@@ -1633,6 +1635,8 @@ pub fn rococo_testnet_genesis(
 		},
 		xcm_pallet: Default::default(),
 		nis_counterpart_balances: Default::default(),
+		assets: Default::default(),
+		ics_20_transfer: Default::default(),
 	}
 }
 
