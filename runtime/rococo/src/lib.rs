@@ -89,6 +89,9 @@ use static_assertions::const_assert;
 pub use frame_system::Call as SystemCall;
 pub use pallet_balances::Call as BalancesCall;
 
+use pallet_assets::AssetsCallback;
+// use ibc_support::module::Router;
+
 /// Constant values used within the runtime.
 use rococo_runtime_constants::{currency::*, fee::*, time::*};
 
@@ -1315,6 +1318,8 @@ impl pallet_sudo::Config for Runtime {
 	type RuntimeCall = RuntimeCall;
 }
 
+
+
 parameter_types! {
 	   pub const ChainVersion: u64 = 0;
 }
@@ -1328,6 +1333,44 @@ impl pallet_ibc::Config for Runtime {
 	type ChainVersion = ChainVersion;
 	type IbcModule = DefaultRouter;
 	type WeightInfo = ();
+}
+
+pub type AssetBalance = u128;
+pub type AssetId = u32;
+pub const DOLLARS: Balance = 100 * CENTS;
+
+impl pallet_assets::Config<pallet_assets::Instance1> for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Balance = AssetBalance;
+	type AssetId = AssetId;
+	type AssetIdParameter = u32;
+	type Currency = Balances;
+	type CreateOrigin = AsEnsureOriginWithArg<frame_system::EnsureSigned<AccountId>>;
+	type ForceOrigin = EnsureRoot<AccountId>;
+	type AssetDeposit = AssetDeposit;
+	type AssetAccountDeposit = ConstU128<DOLLARS>;
+	type MetadataDepositBase = MetadataDepositBase;
+	type MetadataDepositPerByte = MetadataDepositPerByte;
+	type ApprovalDeposit = ApprovalDeposit;
+	type StringLimit = StringLimit;
+	type Freezer = ();
+	type Extra = ();
+	type RemoveItemsLimit = ConstU32<5>;
+	type WeightInfo = pallet_assets::weights::SubstrateWeight<Runtime>;
+	type CallbackHandle = AssetsCallbackHandle;
+}
+
+
+impl pallet_ics20_transfer::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type AssetId = AssetId;
+	type AssetBalance = AssetBalance;
+	type Fungibles = Assets;
+	type AssetIdByName = Ics20Transfer;
+	type IbcContext = pallet_ibc::context::Context<Runtime>;
+	type AccountIdConversion = pallet_ics20_transfer::impls::IbcAccount;
+	const NATIVE_TOKEN_NAME: &'static [u8] = b"ROC";
 }
 
 construct_runtime! {
@@ -1455,7 +1498,9 @@ construct_runtime! {
 		Sudo: pallet_sudo::{Pallet, Call, Storage, Event<T>, Config<T>} = 255,
 
 		//ibc
-		Ibc: pallet_ibc = 253,
+		Assets: pallet_assets::<Instance1> = 243,
+		Ibc: pallet_ibc = 245,
+		Ics20Transfer: pallet_ics20_transfer =246,
 	}
 }
 

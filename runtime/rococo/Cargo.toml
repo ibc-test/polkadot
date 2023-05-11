@@ -91,13 +91,15 @@ xcm-executor = { package = "xcm-executor", path = "../../xcm/xcm-executor", defa
 xcm-builder = { package = "xcm-builder", path = "../../xcm/xcm-builder", default-features = false }
 
 # ibc
+# ibc = { version = "0.28.0", default-features = false, features = ["parity-scale-codec", "mocks-no-std", "serde"], git = "https://github.com/octopus-network/ibc-rs.git", branch = "v0.28.0-codec-borsh-serde"}
 pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40" }
 pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40"}
 ibc-support = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "polkadot-v0.9.40" }
 
 # for dev
+# ibc = {  path = "../../../ibc-rs/crates/ibc", default-features = false, features = ["parity-scale-codec", "mocks-no-std", "serde"]}
 # pallet-ibc = { path = "../../../substrate-ibc/core",  default-features = false }
-# pallet-ics20-transfer = { path = "../../../substrate-ibc/app/ics20-transfer",  default-features = false }
+# pallet-ics20-transfer = { path = "../../../substrate-ibc/app/transfer",  default-features = false }
 # ibc-support = { path = "../../../substrate-ibc/support",  default-features = false }
 
 [dev-dependencies]
@@ -188,6 +190,7 @@ std = [
 	"xcm/std",
 	"xcm-executor/std",
 	"xcm-builder/std",
+	# "ibc/std",
 	"pallet-ibc/std",
 	"pallet-ics20-transfer/std",
 	"ibc-support/std",
