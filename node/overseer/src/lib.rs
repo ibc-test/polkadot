@@ -578,7 +578,7 @@ pub struct Overseer<SupportsParachains> {
 
 	#[subsystem(GossipSupportMessage, sends: [
 		NetworkBridgeTxMessage,
-		NetworkBridgeRxMessage, // TODO <https://github.com/paritytech/polkadot/issues/5626>
+		NetworkBridgeRxMessage, // TODO <https://github.com/octopus-network/polkadot/issues/5626>
 		RuntimeApiMessage,
 		ChainSelectionMessage,
 	])]

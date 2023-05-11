@@ -1076,6 +1076,12 @@ fn rococo_staging_testnet_config_genesis(wasm_binary: &[u8]) -> rococo_runtime::
 		},
 		xcm_pallet: Default::default(),
 		nis_counterpart_balances: Default::default(),
+		assets: pallet_assets::GenesisConfig {
+			// This asset is used by the NIS pallet as counterpart currency.
+			assets: vec![(9, get_account_id_from_seed::<sr25519::Public>("Alice"), true, 1)],
+			..Default::default()
+		},
+		ics_20_transfer: Default::default(),
 	}
 }
 

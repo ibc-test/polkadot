@@ -1316,17 +1316,76 @@ impl pallet_sudo::Config for Runtime {
 }
 
 parameter_types! {
+	pub const AssetDeposit: Balance = 100 * DOLLARS;
+	pub const ApprovalDeposit: Balance = 1 * DOLLARS;
+	pub const StringLimit: u32 = 50;
+	pub const MetadataDepositBase: Balance = 10 * DOLLARS;
+	pub const MetadataDepositPerByte: Balance = 1 * DOLLARS;
+}
+
+impl pallet_assets::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Balance = u128;
+	type AssetId = u32;
+	type AssetIdParameter = parity_scale_codec::Compact<u32>;
+	type Currency = Balances;
+	type CreateOrigin = frame_support::traits::AsEnsureOriginWithArg<EnsureSigned<AccountId>>;
+	type ForceOrigin = EnsureRoot<AccountId>;
+	type AssetDeposit = AssetDeposit;
+	type AssetAccountDeposit = ConstU128<DOLLARS>;
+	type MetadataDepositBase = MetadataDepositBase;
+	type MetadataDepositPerByte = MetadataDepositPerByte;
+	type ApprovalDeposit = ApprovalDeposit;
+	type StringLimit = StringLimit;
+	type Freezer = ();
+	type Extra = ();
+	type CallbackHandle = ();
+	type WeightInfo = pallet_assets::weights::SubstrateWeight<Runtime>;
+	type RemoveItemsLimit = ConstU32<1000>;
+	#[cfg(feature = "runtime-benchmarks")]
+	type BenchmarkHelper = ();
+}
+
+use ibc_support::module::Router;
+pub struct IbcModule;
+
+impl ibc_support::module::AddModule for IbcModule {
+	fn add_module(router: Router) -> Router {
+		match router.clone().add_route(
+			"transfer".parse().expect("never failed"),
+			pallet_ics20_transfer::callback::IbcTransferModule::<Runtime>(
+				sp_std::marker::PhantomData::<Runtime>,
+			),
+		) {
+			Ok(ret) => ret,
+			Err(e) => panic!("add module failed by {}", e),
+		}
+	}
+}
+
+impl pallet_ics20_transfer::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type AssetId = u32;
+	type AssetBalance = Balance;
+	type Fungibles = Assets;
+	type AssetIdByName = Ics20Transfer;
+	type AccountIdConversion = pallet_ics20_transfer::r#impl::IbcAccount;
+	type IbcContext = pallet_ibc::context::Context<Runtime>;
+	const NATIVE_TOKEN_NAME: &'static [u8] = b"DEMO";
+}
+
+parameter_types! {
 	   pub const ChainVersion: u64 = 0;
 }
 
-use ibc_support::module::DefaultRouter;
 impl pallet_ibc::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type TimeProvider = pallet_timestamp::Pallet<Runtime>;
 	type ExpectedBlockTime = ExpectedBlockTime;
 	const IBC_COMMITMENT_PREFIX: &'static [u8] = b"Ibc";
 	type ChainVersion = ChainVersion;
-	type IbcModule = DefaultRouter;
+	type IbcModule = IbcModule;
 	type WeightInfo = ();
 }
 
@@ -1426,6 +1485,8 @@ construct_runtime! {
 		ParaSessionInfo: parachains_session_info::{Pallet, Storage} = 61,
 		ParasDisputes: parachains_disputes::{Pallet, Call, Storage, Event<T>} = 62,
 		ParasSlashing: parachains_slashing::{Pallet, Call, Storage, ValidateUnsigned} = 63,
+		// for ibc
+		Assets: pallet_assets::{Pallet, Call, Storage, Event<T>, Config<T>} = 65,
 
 		// Parachain Onboarding Pallets. Start indices at 70 to leave room.
 		Registrar: paras_registrar::{Pallet, Call, Storage, Event<T>, Config} = 70,
@@ -1455,7 +1516,8 @@ construct_runtime! {
 		Sudo: pallet_sudo::{Pallet, Call, Storage, Event<T>, Config<T>} = 255,
 
 		//ibc
-		Ibc: pallet_ibc = 253,
+		Ibc: pallet_ibc::{Pallet, Call, Storage, Event<T> } = 256,
+		Ics20Transfer: pallet_ics20_transfer::{Pallet, Call, Storage, Event<T>, Config<T>} = 257,
 	}
 }
 

@@ -25,21 +25,21 @@ polkadot-client = { path = "../node/client", optional = true }
 polkadot-node-core-pvf = { path = "../node/core/pvf", optional = true }
 polkadot-performance-test = { path = "../node/test/performance-test", optional = true }
 
-sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
-sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
-sp-keyring = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
-frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.40" }
-try-runtime-cli = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.40" }
-sc-cli = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.40" }
-sc-service = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.40" }
+sp-core = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sp-io = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sp-keyring = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+frame-benchmarking-cli = { git = "https://github.com/octopus-network/substrate", optional = true , branch = "polkadot-v0.9.40-rc" }
+try-runtime-cli = { git = "https://github.com/octopus-network/substrate", optional = true , branch = "polkadot-v0.9.40-rc" }
+sc-cli = { git = "https://github.com/octopus-network/substrate", optional = true , branch = "polkadot-v0.9.40-rc" }
+sc-service = { git = "https://github.com/octopus-network/substrate", optional = true , branch = "polkadot-v0.9.40-rc" }
 polkadot-node-metrics = { path = "../node/metrics" }
-sc-tracing = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.40" }
-sc-sysinfo = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
-sc-executor = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
-sc-storage-monitor = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
+sc-tracing = { git = "https://github.com/octopus-network/substrate", optional = true , branch = "polkadot-v0.9.40-rc" }
+sc-sysinfo = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sc-executor = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sc-storage-monitor = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.40" }
+substrate-build-script-utils = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
 
 [features]
 default = ["db", "cli", "full-node", "polkadot-native"]
