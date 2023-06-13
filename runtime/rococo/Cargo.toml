@@ -89,18 +89,17 @@ polkadot-parachain = { path = "../../parachain", default-features = false }
 xcm = { package = "xcm", path = "../../xcm", default-features = false }
 xcm-executor = { package = "xcm-executor", path = "../../xcm/xcm-executor", default-features = false }
 xcm-builder = { package = "xcm-builder", path = "../../xcm/xcm-builder", default-features = false }
+pallet-assets = { git = "https://github.com/octopus-network/substrate", default-features = false , branch = "polkadot-v0.9.40-rc" }
 
 # ibc
-pallet-assets = { git = "https://github.com/octopus-network/substrate", default-features = false , branch = "polkadot-v0.9.40-rc" }
-# pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40-rc" }
-# pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "polkadot-v0.9.40-rc"}
-# pallet-ibc-utils = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "polkadot-v0.9.40-rc" }
+pallet-ibc = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "icf-m3" }
+pallet-ics20-transfer = { git = "https://github.com/octopus-network/substrate-ibc.git",  default-features = false, branch = "icf-m3"}
+pallet-ibc-utils = { git = "https://github.com/octopus-network/substrate-ibc.git",   default-features = false, branch = "icf-m3" }
 
 # for dev
-# ibc = {  path = "../../../ibc-rs/crates/ibc", default-features = false, features = ["parity-scale-codec", "mocks-no-std", "serde"]}
-pallet-ibc = { path = "../../../substrate-ibc/core",  default-features = false }
-pallet-ics20-transfer = { path = "../../../substrate-ibc/applications/transfer",  default-features = false }
-pallet-ibc-utils = { path = "../../../substrate-ibc/utils",  default-features = false }
+# pallet-ibc = { path = "../../../substrate-ibc/core",  default-features = false }
+# pallet-ics20-transfer = { path = "../../../substrate-ibc/applications/transfer",  default-features = false }
+# pallet-ibc-utils = { path = "../../../substrate-ibc/utils",  default-features = false }
 
 [dev-dependencies]
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }

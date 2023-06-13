@@ -3395,6 +3395,7 @@ dependencies = [
 [[package]]
 name = "ibc"
 version = "0.28.0"
+source = "git+https://github.com/octopus-network/ibc-rs.git?branch=icf-m3#3f1bd80048b24d12af0cd32d9bb7018e73b01640"
 dependencies = [
  "bytes",
  "cfg-if",
@@ -5895,6 +5896,7 @@ dependencies = [
 [[package]]
 name = "pallet-ibc"
 version = "4.0.0-dev"
+source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=icf-m3#af0a96d3b9c2cecc348842c6b7c6d80093779ae1"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -5918,6 +5920,7 @@ dependencies = [
 [[package]]
 name = "pallet-ibc-utils"
 version = "0.1.0"
+source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=icf-m3#af0a96d3b9c2cecc348842c6b7c6d80093779ae1"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -5932,6 +5935,7 @@ dependencies = [
 [[package]]
 name = "pallet-ics20-transfer"
 version = "4.0.0-dev"
+source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=icf-m3#af0a96d3b9c2cecc348842c6b7c6d80093779ae1"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
