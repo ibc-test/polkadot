@@ -1574,14 +1574,26 @@ pub fn rococo_testnet_genesis(
 ) -> rococo_runtime::GenesisConfig {
 	let endowed_accounts: Vec<AccountId> = endowed_accounts.unwrap_or_else(testnet_accounts);
 
-	const ENDOWMENT: u128 = 1_000_000 * ROC;
+	const ENDOWMENT: u128 = 10_000_000 * ROC;
 
 	rococo_runtime::GenesisConfig {
 		system: rococo_runtime::SystemConfig { code: wasm_binary.to_vec() },
 		beefy: Default::default(),
 		indices: rococo_runtime::IndicesConfig { indices: vec![] },
 		balances: rococo_runtime::BalancesConfig {
-			balances: endowed_accounts.iter().map(|k| (k.clone(), ENDOWMENT)).collect(),
+			balances: endowed_accounts
+				.iter()
+				.map(|k| {
+					let acc = k.clone();
+					if acc == get_account_id_from_seed::<sr25519::Public>("Alice") ||
+						acc == get_account_id_from_seed::<sr25519::Public>("Bob")
+					{
+						(acc, ENDOWMENT * 10)
+					} else {
+						(acc, ENDOWMENT)
+					}
+				})
+				.collect(),
 		},
 		session: rococo_runtime::SessionConfig {
 			keys: initial_authorities
@@ -1636,7 +1648,10 @@ pub fn rococo_testnet_genesis(
 		xcm_pallet: Default::default(),
 		nis_counterpart_balances: Default::default(),
 		assets: Default::default(),
-		ics_20_transfer: Default::default(),
+		// ics_20_transfer: Default::default(),
+		ics_20_transfer: rococo_runtime::Ics20TransferConfig {
+			asset_id_by_name: vec![("ERT".to_string(), 666), ("MRT".to_string(), 888)],
+		},
 	}
 }
 
@@ -1913,6 +1928,17 @@ fn rococo_local_testnet_genesis(wasm_binary: &[u8]) -> rococo_runtime::GenesisCo
 	)
 }
 
+pub fn rococo_chain_spec_properties() -> serde_json::map::Map<String, serde_json::Value> {
+	serde_json::json!({
+		"ss58Format": 42,
+		"tokenDecimals": 18,
+		"tokenSymbol": "ROC",
+	})
+	.as_object()
+	.expect("Map given; qed")
+	.clone()
+}
+
 /// Rococo local testnet config (multivalidator Alice + Bob)
 #[cfg(feature = "rococo-native")]
 pub fn rococo_local_testnet_config() -> Result<RococoChainSpec, String> {
@@ -1931,7 +1957,7 @@ pub fn rococo_local_testnet_config() -> Result<RococoChainSpec, String> {
 		None,
 		Some(DEFAULT_PROTOCOL_ID),
 		None,
-		None,
+		Some(rococo_chain_spec_properties()),
 		Default::default(),
 	))
 }

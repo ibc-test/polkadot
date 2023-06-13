@@ -3395,7 +3395,6 @@ dependencies = [
 [[package]]
 name = "ibc"
 version = "0.28.0"
-source = "git+https://github.com/octopus-network/ibc-rs.git?branch=v0.28.0-codec-borsh-serde#3e021ee9d939cc678f0164474b920adbc173306a"
 dependencies = [
  "bytes",
  "cfg-if",
@@ -3405,6 +3404,7 @@ dependencies = [
  "erased-serde",
  "ibc-proto",
  "ics23",
+ "log",
  "num-traits",
  "parity-scale-codec",
  "primitive-types",
@@ -3439,21 +3439,6 @@ dependencies = [
  "serde",
  "subtle-encoding",
  "tendermint-proto",
-]
-
-[[package]]
-name = "ibc-support"
-version = "0.1.0"
-source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=polkadot-v0.9.40-rc#54a5030e67c5aaa641fdcd594980ec2e8a79f2a0"
-dependencies = [
- "frame-benchmarking",
- "frame-support",
- "ibc",
- "ibc-proto",
- "parity-scale-codec",
- "scale-info",
- "sp-runtime",
- "sp-std",
 ]
 
 [[package]]
@@ -5910,15 +5895,15 @@ dependencies = [
 [[package]]
 name = "pallet-ibc"
 version = "4.0.0-dev"
-source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=polkadot-v0.9.40-rc#54a5030e67c5aaa641fdcd594980ec2e8a79f2a0"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
  "frame-system",
  "ibc",
  "ibc-proto",
- "ibc-support",
  "log",
+ "pallet-ibc-utils",
+ "pallet-timestamp",
  "parity-scale-codec",
  "scale-info",
  "serde",
@@ -5931,9 +5916,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-ibc-utils"
+version = "0.1.0"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "ibc",
+ "ibc-proto",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
 name = "pallet-ics20-transfer"
 version = "4.0.0-dev"
-source = "git+https://github.com/octopus-network/substrate-ibc.git?branch=polkadot-v0.9.40-rc#54a5030e67c5aaa641fdcd594980ec2e8a79f2a0"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -5941,14 +5939,16 @@ dependencies = [
  "hex",
  "ibc",
  "ibc-proto",
- "ibc-support",
  "log",
+ "pallet-ibc-utils",
  "parity-scale-codec",
  "primitive-types",
  "scale-info",
+ "sha2 0.10.6",
  "sp-io",
  "sp-runtime",
  "sp-std",
+ "subtle-encoding",
 ]
 
 [[package]]
@@ -9233,7 +9233,6 @@ dependencies = [
  "frame-system-rpc-runtime-api",
  "frame-try-runtime",
  "hex-literal",
- "ibc-support",
  "log",
  "pallet-assets",
  "pallet-authority-discovery",
@@ -9249,6 +9248,7 @@ dependencies = [
  "pallet-elections-phragmen",
  "pallet-grandpa",
  "pallet-ibc",
+ "pallet-ibc-utils",
  "pallet-ics20-transfer",
  "pallet-identity",
  "pallet-im-online",
