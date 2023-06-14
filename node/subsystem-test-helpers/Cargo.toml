@@ -12,11 +12,11 @@ parking_lot = "0.12.0"
 polkadot-node-subsystem = { path = "../subsystem" }
 polkadot-node-subsystem-util = { path = "../subsystem-util" }
 polkadot-primitives = { path = "../../primitives" }
-sp-core = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-keystore = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sc-keystore = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-keyring = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-application-crypto = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sp-core = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-keystore = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sc-keystore = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-keyring = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-application-crypto = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
 
 [dev-dependencies]
 polkadot-overseer = { path = "../overseer" }

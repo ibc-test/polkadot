@@ -31,15 +31,15 @@ polkadot-node-metrics = { path = "../../metrics" }
 polkadot-node-primitives = { path = "../../primitives" }
 
 polkadot-primitives = { path = "../../../primitives" }
-sc-executor = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sc-executor-wasmtime = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sc-executor-common = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-externalities = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-io = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-core = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-wasm-interface = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-maybe-compressed-blob = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
-sp-tracing = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40-rc" }
+sc-executor = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sc-executor-wasmtime = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sc-executor-common = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-externalities = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-io = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-core = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-wasm-interface = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-maybe-compressed-blob = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
+sp-tracing = { git = "https://github.com/octopus-network/substrate", branch = "polkadot-v0.9.40" }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 libc = "0.2.139"
